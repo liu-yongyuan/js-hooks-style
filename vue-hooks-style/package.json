@@ -1,20 +1,33 @@
 {
   "name": "vue-hooks-style",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --max-warnings 0 && pretty-quick --check --branch dev",
+    "lint:fix": "eslint --fix . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json && pretty-quick --branch dev"
   },
   "dependencies": {
     "vue": "^3.2.37"
   },
   "devDependencies": {
+    "@element-plus/eslint-config": "^2.2.12",
     "@vitejs/plugin-vue": "^3.0.0",
+    "eslint": "^8.21.0",
+    "eslint-define-config": "^1.6.0",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3",
     "typescript": "^4.6.4",
+    "unplugin-vue-components": "^0.21.2",
+    "unplugin-vue-define-options": "^0.6.2",
     "vite": "^3.0.0",
     "vue-tsc": "^0.38.4"
+  },
+  "lint-staged": {
+    "*.{vue,js,ts,jsx,tsx,md,json}": "eslint --fix"
   }
 }
