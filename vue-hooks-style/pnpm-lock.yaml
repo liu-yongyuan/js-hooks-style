@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@element-plus/eslint-config': ^2.2.12
+  '@element-plus/icons-vue': ^2.0.6
   '@vitejs/plugin-vue': ^3.0.0
   element-plus: ^2.2.12
   eslint: ^8.21.0
@@ -18,6 +19,7 @@ specifiers:
   vue-tsc: ^0.38.4
 
 dependencies:
+  '@element-plus/icons-vue': 2.0.6_vue@3.2.37
   element-plus: 2.2.12_vue@3.2.37
   vue: 3.2.37
 
