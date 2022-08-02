@@ -5,7 +5,7 @@
         <el-menu :default-openeds="['1', '3']">
           <el-sub-menu index="1">
             <template #title>
-              <el-icon><message /></el-icon>Navigator One
+              <el-icon> <message /> </el-icon>Navigator One
             </template>
             <el-menu-item-group>
               <template #title>Group 1</template>
@@ -22,7 +22,7 @@
           </el-sub-menu>
           <el-sub-menu index="2">
             <template #title>
-              <el-icon><icon-menu /></el-icon>Navigator Two
+              <el-icon> <icon-menu /> </el-icon>Navigator Two
             </template>
             <el-menu-item-group>
               <template #title>Group 1</template>
@@ -39,7 +39,7 @@
           </el-sub-menu>
           <el-sub-menu index="3">
             <template #title>
-              <el-icon><setting /></el-icon>Navigator Three
+              <el-icon> <setting /> </el-icon>Navigator Three
             </template>
             <el-menu-item-group>
               <template #title>Group 1</template>
@@ -59,10 +59,35 @@
     </el-aside>
 
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+      <el-header class="header">
         <div class="toolbar">
           <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px"><setting /></el-icon>
+            <el-icon class="toolbar-icon">
+              <moon v-if="isDark"/>
+              <sunny v-if="!isDark"/>
+            </el-icon>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item @click="handlerLightMode">
+                  <el-icon>
+                    <sunny />
+                  </el-icon>
+                </el-dropdown-item>
+                <el-dropdown-item @click="handlerDarkMode">
+                  <el-icon>
+                    <moon />
+                  </el-icon>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+          <span>阅读模式</span>
+        </div>
+        <div class="toolbar">
+          <el-dropdown>
+            <el-icon class="toolbar-icon">
+              <setting />
+            </el-icon>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item>View</el-dropdown-item>
@@ -90,30 +115,47 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+import { useDark, useToggle } from '@vueuse/core'
 import {
-  ElContainer,
   ElAside,
-  ElHeader,
+  ElContainer,
   ElDropdown,
-  ElDropdownMenu,
   ElDropdownItem,
+  ElDropdownMenu,
+  ElHeader,
+  ElIcon,
   ElMain,
-  ElScrollbar,
-  ElTable,
-  ElTableColumn,
   ElMenu,
   ElMenuItem,
   ElMenuItemGroup,
-  ElIcon,
+  ElScrollbar,
   ElSubMenu,
+  ElTable,
+  ElTableColumn,
 } from 'element-plus'
+import { Menu as IconMenu, Message, Moon, Setting, Sunny } from '@element-plus/icons-vue'
 const item = {
   date: '2016-05-02',
   name: 'Tom',
   address: 'No. 189, Grove St, Los Angeles',
 }
-const tableData = ref(Array.from({ length: 20 }).fill(item))
+const tableData = ref(Array.from({ length: 2 }).fill(item))
+
+const isDark = useDark({
+  selector: 'html',
+  attribute: 'class',
+  valueDark: 'dark',
+  valueLight: 'light',
+})
+const toggleDark = useToggle(isDark)
+
+const handlerLightMode = () => {
+  toggleDark(false)
+}
+
+const handlerDarkMode = () => {
+  toggleDark(true)
+}
 </script>
 
 <style scoped>
@@ -122,21 +164,36 @@ const tableData = ref(Array.from({ length: 20 }).fill(item))
   background-color: var(--el-color-primary-light-7);
   color: var(--el-text-color-primary);
 }
+
 .layout-container-demo .el-aside {
   color: var(--el-text-color-primary);
   background: var(--el-color-primary-light-8);
 }
+
 .layout-container-demo .el-menu {
   border-right: none;
 }
+
 .layout-container-demo .el-main {
   padding: 0;
 }
-.layout-container-demo .toolbar {
+
+.header {
+  text-align: right;
+  font-size: 12px;
+}
+
+.toolbar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   right: 20px;
+  margin-left: 15px;
+}
+
+.toolbar-icon {
+  margin-right: 8px;
+  margin-top: 1px;
 }
 </style>
