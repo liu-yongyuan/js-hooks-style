@@ -18,5 +18,8 @@ export default defineConfig(async () => {
         resolvers: [ElementPlusResolver()],
       }),
     ],
+    resolve: {
+      alias: {},
+    },
   }
 })

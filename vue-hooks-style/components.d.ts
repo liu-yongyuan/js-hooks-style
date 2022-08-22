@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Aside: typeof import('./src/components/aside/src/aside.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
@@ -22,5 +23,8 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    Mode: typeof import('./src/components/mode/src/mode.vue')['default']
+    PageAside: typeof import('./src/components/aside/src/page-aside.vue')['default']
+    PageMain: typeof import('./src/components/main/src/page-main.vue')['default']
   }
 }
